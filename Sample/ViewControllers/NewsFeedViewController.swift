@@ -7,12 +7,15 @@
 
 import UIKit
 import Nuke
+import SafariServices
 
 class NewsFeedViewController: UIViewController {
 
     // MARK: - Outlets
     
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Properties
     
     // Make sure to keep a strong reference to preheater.
     private let preheater = ImagePreheater()
@@ -35,10 +38,20 @@ class NewsFeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTableView()
+        updateNewsFeed()
+    }
+    
+    /// Registers the required cells and applies further configuration.
+    func setupTableView() {
+        
         let cellNib = UINib(nibName: "NewsFeedCell", bundle: Bundle.main)
         tableView.register(cellNib, forCellReuseIdentifier: "NewsFeedCell")
         
-        updateNewsFeed()
+        tableView.estimatedRowHeight = 250
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        tableView.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 24, right: 0)
     }
     
     // MARK: -
@@ -101,7 +114,25 @@ class NewsFeedViewController: UIViewController {
 extension NewsFeedViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selected row \(indexPath.row)")
+        
+        let current = news[indexPath.row]
+        
+        guard let url = URL(string: current.link) else {
+            UIAlertController.simpleDialog(message: "This news has no link.")
+            return
+        }
+        
+        let safariConfig = SFSafariViewController.Configuration()
+        safariConfig.entersReaderIfAvailable = true
+        
+        let safariVC = SFSafariViewController(url: url,
+                                              configuration: safariConfig)
+        
+        present(safariVC, animated: true) {
+            
+            current.setRead(true)
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
     }
 }
 

@@ -75,6 +75,13 @@ struct News {
     
     // MARK: - Helper
     
+    /// Sets or removes the read state for this article.
+    /// - Parameter value: true to mark as read, false to mark as unread
+    func setRead(_ value: Bool) {
+        let timestamp = value ? Date().timeIntervalSince1970 : 0
+        UserDefaults.standard.setValue(timestamp, forKey: guid)
+    }
+    
     /// Takes a date string and turns it into a Date obejct.
     /// Intended for use with news pubDate as the date format is
     /// - Parameter source: string with a potential date to be extracted
