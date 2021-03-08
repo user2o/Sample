@@ -11,7 +11,7 @@
         <!--Navigation Controller-->
         <scene sceneID="2Vl-gB-bcf">
             <objects>
-                <navigationController id="peY-br-RpO" sceneMemberID="viewController">
+                <navigationController extendedLayoutIncludesOpaqueBars="YES" id="peY-br-RpO" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="fcn-bV-SjD">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -27,13 +27,13 @@
         <!--NEWS-->
         <scene sceneID="qUz-Dh-ufo">
             <objects>
-                <viewController id="mkC-se-ce4" customClass="NewsFeedViewController" customModule="Sample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="mkC-se-ce4" customClass="NewsFeedViewController" customModule="Sample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TFo-3D-Vnp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oyW-KY-2Jl">
-                                <rect key="frame" x="0.0" y="140" width="414" height="756"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="mkC-se-ce4" id="cor-Y1-M7s"/>
@@ -45,13 +45,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="oyW-KY-2Jl" secondAttribute="bottom" id="95x-RQ-AF9"/>
+                            <constraint firstAttribute="top" secondItem="oyW-KY-2Jl" secondAttribute="top" id="FCP-mm-J7L"/>
                             <constraint firstItem="oyW-KY-2Jl" firstAttribute="leading" secondItem="s3d-pF-Olx" secondAttribute="leading" id="HVP-Ba-GeC"/>
                             <constraint firstItem="s3d-pF-Olx" firstAttribute="trailing" secondItem="oyW-KY-2Jl" secondAttribute="trailing" id="dP0-wQ-icu"/>
-                            <constraint firstItem="oyW-KY-2Jl" firstAttribute="top" secondItem="s3d-pF-Olx" secondAttribute="top" id="ghu-OR-yqh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="NEWS" id="Yvl-bQ-ERO">
-                        <barButtonItem key="backBarButtonItem" title="News" id="Vjl-Da-GY8"/>
+                    <navigationItem key="navigationItem" title="NEWS" id="dhM-Se-9nC">
+                        <barButtonItem key="backBarButtonItem" title="News" id="IiA-aL-Jah"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="oyW-KY-2Jl" id="Rfm-25-m36"/>
