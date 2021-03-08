@@ -45,6 +45,14 @@ class NewsFeedViewController: UIViewController {
     /// Registers the required cells and applies further configuration.
     func setupTableView() {
         
+        // Add refresh control.
+        let refresh = UIRefreshControl()
+        refresh.attributedTitle = NSAttributedString(string: "pull to refresh")
+        refresh.addTarget(self,
+                          action: #selector(refreshValueChanged(sender:)),
+                          for: .valueChanged)
+        tableView.refreshControl = refresh
+        
         // Register Nib as cell.
         let cellNib = UINib(nibName: "NewsFeedCell", bundle: Bundle.main)
         tableView.register(cellNib, forCellReuseIdentifier: "NewsFeedCell")
@@ -55,6 +63,12 @@ class NewsFeedViewController: UIViewController {
         
         // Add some insets
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+    }
+    
+    // MARK: - Refresh Control Action
+    
+    @objc func refreshValueChanged(sender: UIRefreshControl) {
+        updateNewsFeed()
     }
     
     // MARK: -
@@ -91,6 +105,11 @@ class NewsFeedViewController: UIViewController {
                 UIAlertController.simpleDialog(title: "Feed Error",
                                                message: message,
                                                button: "Close")
+            }
+            
+            // End refresh control.
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.125) {
+                self.tableView.refreshControl?.endRefreshing()
             }
         }
     }
