@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 class NewsFeedViewController: UIViewController {
 
@@ -13,12 +14,29 @@ class NewsFeedViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var news: [News] = []
+    // Make sure to keep a strong reference to preheater.
+    private let preheater = ImagePreheater()
+    
+    // Hold news in memory for displaying.
+    private var news: [News] = [] {
+        didSet {
+            
+            // Turn all image urls into ImageRequest objects.
+            // This way the image can be modified, like applying filters.
+            let requests = news.compactMap { imageRequest(url: $0.imageURL) }
+            
+            // Make sure to keep a strong reference to preheater.
+            preheater.startPreheating(with: requests)
+        }
+    }
     
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let cellNib = UINib(nibName: "NewsFeedCell", bundle: Bundle.main)
+        tableView.register(cellNib, forCellReuseIdentifier: "NewsFeedCell")
         
         updateNewsFeed()
     }
@@ -44,11 +62,19 @@ class NewsFeedViewController: UIViewController {
                     self.updateNewsFeedFinished(news)
                 }
             }
-            catch NewsError.failure(let message) {
-                // TODO: handle error
+            catch NewsError.failure(let error) {
+                // Show error message.
+                let message = String(format: "Unfortnuately there was an error while getting the latest news: %@.", error)
+                UIAlertController.simpleDialog(title: "Feed Error",
+                                               message: message,
+                                               button: "Close")
             }
             catch {
-                // TODO: a more generic error
+                // Show error message.
+                let message = String(format: "Unfortnuately there was an error while getting the latest news: %@.", error.localizedDescription)
+                UIAlertController.simpleDialog(title: "Feed Error",
+                                               message: message,
+                                               button: "Close")
             }
         }
     }
@@ -59,6 +85,16 @@ class NewsFeedViewController: UIViewController {
     func updateNewsFeedFinished(_ result: [News]) {
         news = result
         tableView.reloadData()
+    }
+    
+    /// Create a ImageRequest for nuke from an image URL.
+    ///
+    /// - Parameters:
+    ///   - url: image address
+    /// - Returns: nil if url is not available, a simple unmodified ImageRequest otherwise
+    func imageRequest(url: URL?) -> ImageRequest? {
+        guard let url = url else { return nil }
+        return ImageRequest(url: url)
     }
 }
 
@@ -76,11 +112,39 @@ extension NewsFeedViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return news.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return UITableViewCell()
+        // Dequeue the news cell from tableview.
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsFeedCell", for: indexPath)
+        
+        // Try to cast it.
+        if let cell = cell as? NewsFeedCell {
+            
+            // Assign current news to current cell.
+            let current = news[indexPath.row]
+            cell.news = current
+            
+            // Using Nuke to download current header image into cell.
+            if let request = imageRequest(url: current.imageURL) {
+                
+                let options = ImageLoadingOptions(
+                    placeholder: UIImage(named: "Placeholder"),
+                    transition: .fadeIn(duration: 0.125)
+                )
+                
+                Nuke.loadImage(with: request,
+                               options: options,
+                               into: cell.headImageView)
+            }
+            else {
+                // Set fallback image
+                cell.headImageView.image = UIImage(named: "Placeholder")
+            }
+        }
+        
+        return cell
     }
 }

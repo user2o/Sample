@@ -19,6 +19,19 @@ struct News {
     let description : String   // description
     let imageURL    : URL?     // enclosure->url
     
+    // MARK: - Computed Properties
+    
+    var publishedFormatted: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy 'at' HH:mm"
+        formatter.timeZone = Calendar.current.timeZone
+        return formatter.string(from: published)
+    }
+    
+    var read: Bool {
+        UserDefaults.standard.double(forKey: guid) != 0
+    }
+    
     // MARK: - Lifecycle
     
     /// Failable constructor to create a News object from XML content.
