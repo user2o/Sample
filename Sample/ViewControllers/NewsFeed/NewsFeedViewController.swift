@@ -26,20 +26,37 @@ class NewsFeedViewController: UIViewController {
             
             // Turn all image urls into ImageRequest objects.
             // This way the image can be modified, like applying filters.
-            let requests = news.compactMap { imageRequest(url: $0.imageURL) }
+            let requests = news.compactMap { imageRequest($0) }
             
             // Make sure to keep a strong reference to preheater.
             preheater.startPreheating(with: requests)
         }
     }
     
+    // Temporary remember to reload the table when the feed URL changed.
+    private var needsReload: Bool = false
+    
     // MARK: - View Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(feedURLChanged(note:)),
+                                               name: .feedURLChanged,
+                                               object: nil)
+        
         setupTableView()
         updateNewsFeed()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if needsReload {
+            needsReload = false
+            tableView.reloadData()
+        }
     }
     
     /// Registers the required cells and applies further configuration.
@@ -127,9 +144,35 @@ class NewsFeedViewController: UIViewController {
     /// - Parameters:
     ///   - url: image address
     /// - Returns: nil if url is not available, a simple unmodified ImageRequest otherwise
-    func imageRequest(url: URL?) -> ImageRequest? {
-        guard let url = url else { return nil }
-        return ImageRequest(url: url)
+    func imageRequest(_ news: News) -> ImageRequest? {
+        
+        // Make sure there is an image URL.
+        guard let url = news.imageURL else { return nil }
+        
+        // Determine if grayscale filter should be used.
+        let useFilter = news.read && Settings.shared.rssGrayscaleReadArticles
+        
+        let processors: [ImageProcessors.CoreImageFilter]
+        
+        if useFilter {
+            // Add CIFilter to list of processors.
+            let monoFilter = ImageProcessors.CoreImageFilter(name: "CIPhotoEffectMono")
+            processors = [monoFilter]
+        }
+        else {
+            // Do not use filter at all. Just the plain image.
+            processors = []
+        }
+        
+        return ImageRequest(url: url, processors: processors)
+    }
+    
+    // MARK: - Notification
+    
+    @objc func feedURLChanged(note: Notification) {
+        news = []
+        needsReload = true
+        updateNewsFeed()
     }
 }
 
@@ -181,7 +224,7 @@ extension NewsFeedViewController: UITableViewDataSource {
             cell.news = current
             
             // Using Nuke to download current header image into cell.
-            if let request = imageRequest(url: current.imageURL) {
+            if let request = imageRequest(current) {
                 
                 let options = ImageLoadingOptions(
                     placeholder: UIImage(named: "Placeholder"),

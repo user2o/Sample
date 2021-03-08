@@ -15,16 +15,14 @@ enum NewsError: Error {
 
 struct NewsFeedConnector {
     
-    
-    
     /// Performs a simple HTTP GET request to download an RSS feed.
     /// The downloaded feed is then parsed into objects of type News.
     /// An error is thrown containing a message in case something goes wrong.
     /// - Returns: list of parsed items as News
     public func fetch() throws -> [News] {
         
-        // TODO: establish settings object to store and edit feed url
-        let feedURL = "https://movieweb.com/rss/all-news/"
+        // Get RSS feed url from settings.
+        let feedURL = Settings.shared.rssFeedURL
         
         // Create an instance of this simple HTTP client called Just.
         // This instance is to be prefered over the singleton for threadding reasons.

@@ -15,6 +15,9 @@
 		D490BBB125F6184200501B07 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BBB025F6184200501B07 /* UIAlertController.swift */; };
 		D490BBB525F619E300501B07 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BBB325F619E300501B07 /* NewsFeedCell.swift */; };
 		D490BBB625F619E300501B07 /* NewsFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D490BBB425F619E300501B07 /* NewsFeedCell.xib */; };
+		D490BBC925F64ED400501B07 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BBC825F64ED400501B07 /* SettingsTableViewController.swift */; };
+		D490BBCE25F64F1A00501B07 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BBCD25F64F1A00501B07 /* Settings.swift */; };
+		D490BBD225F64FAC00501B07 /* Notification.Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BBD125F64FAC00501B07 /* Notification.Name.swift */; };
 		D4CF3A5125F608B500C75FD2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF3A5025F608B500C75FD2 /* AppDelegate.swift */; };
 		D4CF3A5325F608B500C75FD2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CF3A5225F608B500C75FD2 /* SceneDelegate.swift */; };
 		D4CF3A5825F608B500C75FD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4CF3A5625F608B500C75FD2 /* Main.storyboard */; };
@@ -33,6 +36,9 @@
 		D490BBB025F6184200501B07 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		D490BBB325F619E300501B07 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		D490BBB425F619E300501B07 /* NewsFeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsFeedCell.xib; sourceTree = "<group>"; };
+		D490BBC825F64ED400501B07 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		D490BBCD25F64F1A00501B07 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D490BBD125F64FAC00501B07 /* Notification.Name.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.Name.swift; sourceTree = "<group>"; };
 		D4CF3A4D25F608B500C75FD2 /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4CF3A5025F608B500C75FD2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D4CF3A5225F608B500C75FD2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,9 +80,8 @@
 		D408A80C25F60BC900EC615D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D408A80925F60BC400EC615D /* NewsFeedViewController.swift */,
-				D490BBB325F619E300501B07 /* NewsFeedCell.swift */,
-				D490BBB425F619E300501B07 /* NewsFeedCell.xib */,
+				D490BBC525F64EB500501B07 /* NewsFeed */,
+				D490BBC725F64EC000501B07 /* Settings */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -94,8 +99,36 @@
 			children = (
 				D408A81725F610D100EC615D /* String.swift */,
 				D490BBB025F6184200501B07 /* UIAlertController.swift */,
+				D490BBD125F64FAC00501B07 /* Notification.Name.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D490BBC525F64EB500501B07 /* NewsFeed */ = {
+			isa = PBXGroup;
+			children = (
+				D408A80925F60BC400EC615D /* NewsFeedViewController.swift */,
+				D490BBB325F619E300501B07 /* NewsFeedCell.swift */,
+				D490BBB425F619E300501B07 /* NewsFeedCell.xib */,
+			);
+			path = NewsFeed;
+			sourceTree = "<group>";
+		};
+		D490BBC725F64EC000501B07 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D490BBC825F64ED400501B07 /* SettingsTableViewController.swift */,
+				D490BBCD25F64F1A00501B07 /* Settings.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		D490BBD425F651C300501B07 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D408A80F25F60DAD00EC615D /* NewsFeedConnector.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		D4CF3A4425F608B500C75FD2 = {
@@ -119,6 +152,7 @@
 		D4CF3A4F25F608B500C75FD2 /* Sample */ = {
 			isa = PBXGroup;
 			children = (
+				D490BBD425F651C300501B07 /* Network */,
 				D408A81625F6107B00EC615D /* Extensions */,
 				D408A81225F60EB500EC615D /* Models */,
 				D408A80C25F60BC900EC615D /* ViewControllers */,
@@ -128,7 +162,6 @@
 				D4CF3A5925F608B900C75FD2 /* Assets.xcassets */,
 				D4CF3A5B25F608B900C75FD2 /* LaunchScreen.storyboard */,
 				D4CF3A5E25F608B900C75FD2 /* Info.plist */,
-				D408A80F25F60DAD00EC615D /* NewsFeedConnector.swift */,
 			);
 			path = Sample;
 			sourceTree = "<group>";
@@ -252,10 +285,13 @@
 				D4CF3A5125F608B500C75FD2 /* AppDelegate.swift in Sources */,
 				D4CF3A5325F608B500C75FD2 /* SceneDelegate.swift in Sources */,
 				D490BBB125F6184200501B07 /* UIAlertController.swift in Sources */,
+				D490BBCE25F64F1A00501B07 /* Settings.swift in Sources */,
 				D408A81025F60DAD00EC615D /* NewsFeedConnector.swift in Sources */,
 				D408A81425F60EDE00EC615D /* News.swift in Sources */,
 				D490BBB525F619E300501B07 /* NewsFeedCell.swift in Sources */,
+				D490BBD225F64FAC00501B07 /* Notification.Name.swift in Sources */,
 				D408A80A25F60BC400EC615D /* NewsFeedViewController.swift in Sources */,
+				D490BBC925F64ED400501B07 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
