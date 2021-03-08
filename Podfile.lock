@@ -1,0 +1,24 @@
+PODS:
+  - Just (0.8.0)
+  - Nuke (9.3.0)
+  - SwiftyXML (3.1.0)
+
+DEPENDENCIES:
+  - Just
+  - Nuke
+  - SwiftyXML
+
+SPEC REPOS:
+  trunk:
+    - Just
+    - Nuke
+    - SwiftyXML
+
+SPEC CHECKSUMS:
+  Just: aef5105fb2c7069b65aa6f21aec8f429057f9c19
+  Nuke: 56a7266398951d9af3a897a71a7b662344915ec5
+  SwiftyXML: 1ea095c1416039db95cb050f0a34559b061ede93
+
+PODFILE CHECKSUM: fe6fb2c6a9aeb127c97430dde0dac5922daefb1e
+
+COCOAPODS: 1.10.1
