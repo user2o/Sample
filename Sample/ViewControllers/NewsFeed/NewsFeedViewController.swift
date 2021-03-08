@@ -90,7 +90,7 @@ class NewsFeedViewController: UIViewController {
     
     // MARK: -
     
-    /// Invokes the download of news items async.
+    /// Invokes the download of news items on a side thread.
     /// Also invokes updating the table view once finished.
     /// Also invokes showing an error message if something goes wrong.
     func updateNewsFeed() {
@@ -109,7 +109,7 @@ class NewsFeedViewController: UIViewController {
                     self.updateNewsFeedFinished(news)
                 }
             }
-            catch NewsError.failure(let error) {
+            catch NetworkError.failure(let error) {
                 // Show error message.
                 let message = String(format: "Unfortnuately there was an error while getting the latest news: %@.", error)
                 UIAlertController.simpleDialog(title: "Feed Error",

@@ -9,10 +9,12 @@ import Foundation
 import Just
 import SwiftyXML
 
-enum NewsError: Error {
+enum NetworkError: Error {
     case failure(String)
 }
 
+/// A simple RSS component to download an XML, parse it and obtain a convenient list of News.
+/// As an example this connector uses "Just" to perform the HTTP requests.
 struct NewsFeedConnector {
     
     /// Performs a simple HTTP GET request to download an RSS feed.
@@ -33,12 +35,12 @@ struct NewsFeedConnector {
             
         // Catch error if there is one.
         if let error = response.error {
-            throw NewsError.failure(error.localizedDescription)
+            throw NetworkError.failure(error.localizedDescription)
         }
         
         // Extract content of response as bytes.
         guard let content = response.content else {
-            throw NewsError.failure("Response has no content.")
+            throw NetworkError.failure("Response has no content.")
         }
         
         // Init XML object with HTTP response content.
@@ -47,7 +49,7 @@ struct NewsFeedConnector {
         // Extract list of "item" nodes from XML.
         guard let items = xml?.channel.item.xmlList else {
             // TODO: handle error = "no items in feed"
-            throw NewsError.failure("Response contains not a single item node.")
+            throw NetworkError.failure("Response contains not a single item node.")
         }
         
         // Turn items into News objects.
