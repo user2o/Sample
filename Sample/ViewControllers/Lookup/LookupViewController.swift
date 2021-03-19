@@ -7,9 +7,10 @@
 
 import UIKit
 import Nuke
+import SwiftUI
 
 class LookupViewController: UIViewController {
-
+    
     // MARK: - Outlets
     
     @IBOutlet weak var tableView: UITableView!
@@ -109,6 +110,28 @@ class LookupViewController: UIViewController {
         }
     }
     
+    /// Invokes the SwiftUI detail view.
+    /// - Parameter item: the search result item to be resolved at the omdb api
+    private func showSwiftUI(_ item: SearchResultItem?) {
+        
+        guard let item = item else {
+            // TODO: show error alert
+            return
+        }
+        
+        // Create the resolver. It immediately starts resolving the item.
+        let resolver = OMDBResolver(searchResult: item)
+        
+        // Create the detail view written in SwiftUI.
+        let swiftUIController = LookupDetailSwiftUI(resolver: resolver)
+        
+        // Instantiate the UIKit container to hold the SwiftUI controller.
+        // And present it modally.
+        let detailViewController = UIHostingController(rootView: swiftUIController)
+        detailViewController.modalPresentationStyle = .formSheet
+        present(detailViewController, animated: true, completion: nil)
+    }
+    
     /// Updates the UI with the latest search result.
     /// - Parameter newData: new SearchResult to show in the UI; this will replace the current lastResult class property
     private func handleNewData(_ newData: SearchResult) {
@@ -158,8 +181,15 @@ extension LookupViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let current = lastResult?.search[indexPath.row]
-        performSegue(withIdentifier: "LookupDetail", sender: current)
+        let selected = lastResult?.search[indexPath.row]
+        
+        let s = Settings.shared
+        switch s.useSwiftUIDetailView {
+            case true:
+                showSwiftUI(selected)
+            case false:
+                performSegue(withIdentifier: "LookupDetail", sender: selected)
+        }
     }
 }
 

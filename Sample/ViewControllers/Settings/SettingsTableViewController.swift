@@ -15,6 +15,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var switchGrayscale  : UISwitch!
     @IBOutlet weak var textFieldFeedURL : UITextField!
     @IBOutlet weak var textFieldAPIKey  : UITextField!
+    @IBOutlet weak var switchSwiftUI: UISwitch!
     
     // MARK: - View Lifecycle
     
@@ -29,6 +30,7 @@ class SettingsTableViewController: UITableViewController {
         switchGrayscale.isOn    = s.rssGrayscaleReadArticles
         textFieldFeedURL.text   = s.rssFeedURL.absoluteString
         textFieldAPIKey.text    = s.apiKey
+        switchSwiftUI.isOn      = s.useSwiftUIDetailView
     }
     
     // MARK: - Actions
@@ -44,6 +46,16 @@ class SettingsTableViewController: UITableViewController {
         _ = s.store()
     }
     
+    @IBAction func switchUswSwiftUIValueChanged(_ sender: Any) {
+        
+        guard let sender = sender as? UISwitch else {
+            setup()
+            return
+        }
+        
+        let s = Settings(swiftUI: sender.isOn)
+        _ = s.store()
+    }
     // MARK: -
     
     func block() -> UIAlertController {
@@ -150,7 +162,7 @@ class SettingsTableViewController: UITableViewController {
         
         switch section {
             case 0: return 2
-            case 1: return 1
+            case 1: return 2
             default: return 0
         }
     }

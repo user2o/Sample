@@ -229,6 +229,36 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="56" id="1xb-nw-gPg">
+                                        <rect key="frame" x="0.0" y="330.5" width="414" height="56"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1xb-nw-gPg" id="L3R-ak-hXZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use SwiftUI for detail view" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3t-ur-caX">
+                                                    <rect key="frame" x="20" y="9" width="315" height="38"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ATI-xT-Qtl">
+                                                    <rect key="frame" x="343" y="12.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="switchUswSwiftUIValueChanged:" destination="2jw-zR-P40" eventType="valueChanged" id="KpA-td-fPq"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="ATI-xT-Qtl" secondAttribute="trailing" constant="22" id="4Cp-ab-nF5"/>
+                                                <constraint firstItem="ATI-xT-Qtl" firstAttribute="leading" secondItem="e3t-ur-caX" secondAttribute="trailing" constant="8" id="VsY-ta-tjd"/>
+                                                <constraint firstAttribute="bottom" secondItem="e3t-ur-caX" secondAttribute="bottom" constant="9" id="Vtw-f6-9Ss"/>
+                                                <constraint firstItem="e3t-ur-caX" firstAttribute="leading" secondItem="L3R-ak-hXZ" secondAttribute="leading" constant="20" id="cyJ-hx-OIn"/>
+                                                <constraint firstItem="ATI-xT-Qtl" firstAttribute="centerY" secondItem="L3R-ak-hXZ" secondAttribute="centerY" id="iAk-di-kIX"/>
+                                                <constraint firstItem="e3t-ur-caX" firstAttribute="top" secondItem="L3R-ak-hXZ" secondAttribute="top" constant="9" id="wCV-7t-aGm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -242,6 +272,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="switchGrayscale" destination="mla-Ys-Coj" id="89B-D5-BEc"/>
+                        <outlet property="switchSwiftUI" destination="ATI-xT-Qtl" id="TvX-m5-jD3"/>
                         <outlet property="textFieldAPIKey" destination="B4j-KH-wPE" id="oWV-im-FIX"/>
                         <outlet property="textFieldFeedURL" destination="AdC-nB-Mj4" id="kUD-wq-Sux"/>
                     </connections>

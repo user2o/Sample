@@ -12,6 +12,10 @@
 		D408A81025F60DAD00EC615D /* NewsFeedConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408A80F25F60DAD00EC615D /* NewsFeedConnector.swift */; };
 		D408A81425F60EDE00EC615D /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408A81325F60EDE00EC615D /* News.swift */; };
 		D408A81825F610D100EC615D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408A81725F610D100EC615D /* String.swift */; };
+		D410C1992603DEAE00668743 /* LookupDetailSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410C1982603DEAE00668743 /* LookupDetailSwiftUI.swift */; };
+		D410C19E26049B6500668743 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D410C19D26049B6500668743 /* ActivityIndicator.swift */; };
+		D48157A12604A34D00322CCA /* OMDBResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48157A02604A34D00322CCA /* OMDBResolver.swift */; };
+		D48157A42604A36B00322CCA /* Poster.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48157A32604A36B00322CCA /* Poster.swift */; };
 		D490BBB125F6184200501B07 /* UIAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BBB025F6184200501B07 /* UIAlertController.swift */; };
 		D490BBB525F619E300501B07 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D490BBB325F619E300501B07 /* NewsFeedCell.swift */; };
 		D490BBB625F619E300501B07 /* NewsFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D490BBB425F619E300501B07 /* NewsFeedCell.xib */; };
@@ -51,6 +55,10 @@
 		D408A80F25F60DAD00EC615D /* NewsFeedConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedConnector.swift; sourceTree = "<group>"; };
 		D408A81325F60EDE00EC615D /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		D408A81725F610D100EC615D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		D410C1982603DEAE00668743 /* LookupDetailSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookupDetailSwiftUI.swift; sourceTree = "<group>"; };
+		D410C19D26049B6500668743 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		D48157A02604A34D00322CCA /* OMDBResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMDBResolver.swift; sourceTree = "<group>"; };
+		D48157A32604A36B00322CCA /* Poster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Poster.swift; sourceTree = "<group>"; };
 		D490BBB025F6184200501B07 /* UIAlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertController.swift; sourceTree = "<group>"; };
 		D490BBB325F619E300501B07 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		D490BBB425F619E300501B07 /* NewsFeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsFeedCell.xib; sourceTree = "<group>"; };
@@ -145,6 +153,26 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		D410C19B26049AEE00668743 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				D410C1982603DEAE00668743 /* LookupDetailSwiftUI.swift */,
+				D410C19D26049B6500668743 /* ActivityIndicator.swift */,
+				D48157A02604A34D00322CCA /* OMDBResolver.swift */,
+				D48157A32604A36B00322CCA /* Poster.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		D410C19C26049AF500668743 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				D490BC0425F6883300501B07 /* Cells */,
+				D490BBFC25F683BD00501B07 /* LookupDetailViewController.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		D490BBC525F64EB500501B07 /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,8 +214,8 @@
 		D490BBF625F6830D00501B07 /* Lookup Detail */ = {
 			isa = PBXGroup;
 			children = (
-				D490BC0425F6883300501B07 /* Cells */,
-				D490BBFC25F683BD00501B07 /* LookupDetailViewController.swift */,
+				D410C19C26049AF500668743 /* UIKit */,
+				D410C19B26049AEE00668743 /* SwiftUI */,
 			);
 			path = "Lookup Detail";
 			sourceTree = "<group>";
@@ -369,6 +397,7 @@
 				D490BC1825F68DAB00501B07 /* LookupDetailRatingCell.swift in Sources */,
 				D4CF3A5125F608B500C75FD2 /* AppDelegate.swift in Sources */,
 				D490BC0D25F68A6E00501B07 /* LookupDetailKeyValueCell.swift in Sources */,
+				D410C1992603DEAE00668743 /* LookupDetailSwiftUI.swift in Sources */,
 				D4CF3A5325F608B500C75FD2 /* SceneDelegate.swift in Sources */,
 				D490BBED25F6726000501B07 /* SearchResultItem.swift in Sources */,
 				D490BC1D25F6AB5E00501B07 /* LookupDetailHeadlineCell.swift in Sources */,
@@ -378,8 +407,11 @@
 				D490BBE625F658FB00501B07 /* SearchResultCell.swift in Sources */,
 				D490BBCE25F64F1A00501B07 /* Settings.swift in Sources */,
 				D408A81025F60DAD00EC615D /* NewsFeedConnector.swift in Sources */,
+				D48157A42604A36B00322CCA /* Poster.swift in Sources */,
 				D408A81425F60EDE00EC615D /* News.swift in Sources */,
 				D490BBEF25F6726100501B07 /* OMDBItem.swift in Sources */,
+				D410C19E26049B6500668743 /* ActivityIndicator.swift in Sources */,
+				D48157A12604A34D00322CCA /* OMDBResolver.swift in Sources */,
 				D490BBFD25F683BD00501B07 /* LookupDetailViewController.swift in Sources */,
 				D490BBB525F619E300501B07 /* NewsFeedCell.swift in Sources */,
 				D490BBD225F64FAC00501B07 /* Notification.Name.swift in Sources */,

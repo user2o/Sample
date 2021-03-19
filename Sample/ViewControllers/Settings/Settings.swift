@@ -18,10 +18,12 @@ struct Settings: Codable {
     let rssGrayscaleReadArticles    : Bool
     let rssFeedURL                  : URL
     let apiKey                      : String
+    let useSwiftUIDetailView        : Bool
     
     init(grayscale: Bool? = nil,
          feedURL: URL? = nil,
-         apiKey: String? = nil)
+         apiKey: String? = nil,
+         swiftUI: Bool? = nil)
     {
         // Open stored settings as
         let stored = Settings.open()
@@ -37,6 +39,10 @@ struct Settings: Codable {
         self.apiKey = apiKey
             ?? stored?.apiKey
             ?? ""
+        
+        self.useSwiftUIDetailView = swiftUI
+            ?? stored?.useSwiftUIDetailView
+            ?? true
         
     }
     
